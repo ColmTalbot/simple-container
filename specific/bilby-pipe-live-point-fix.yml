@@ -1,0 +1,11 @@
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - ipython
+  - tmux
+  - scipy>=1.14.1
+  - pip
+  - pip:
+      - git+https://github.com/ColmTalbot/bilby.git@avoid-dynesty-add-live
+      - git+https://git.ligo.org/colm.talbot/bilby_pipe.git@attempt-singularity
