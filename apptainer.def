@@ -1,0 +1,23 @@
+Bootstrap: docker
+From: mambaorg/micromamba:1.5.8
+
+%files
+    {{ ENVFILE }} /environment.yml
+
+%environment
+    export PATH="${MAMBA_ROOT_PREFIX}/bin:$PATH"
+
+%post -c /bin/bash
+
+    apt-get -y update
+    apt-get -y install vim git build-essential
+
+    # Install into base environment from input yml
+    micromamba install -y -n base -f environment.yml && \
+    micromamba clean --all --yes
+
+%runscript
+    #!/bin/bash
+
+    # Activate base environment
+    source /usr/local/bin/_activate_current_env.sh
